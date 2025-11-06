@@ -16,8 +16,6 @@ Fecha: [7/11/2025]
 import random
 
 
-
-
 def limpiar_pantalla():
     """
     Imprime varias líneas en blanco para 'limpiar' la consola
@@ -45,10 +43,10 @@ def solicitar_palabra()->str:
     
     
     # TODO: Implementar la función
-    # - Usar un bucle while para repetir hasta que la palabra sea válida - ya 
-    # - Verificar que tenga al menos 5 caracteres (len()) - ya 
-    # - Verificar que solo contenga letras (isalpha()) - ya 
-    # - Convertir a mayúsculas (upper()) - ya 
+    # - Usar un bucle while para repetir hasta que la palabra sea válida N/A
+    # - Verificar que tenga al menos 5 caracteres (len())  N/A
+    # - Verificar que solo contenga letras (isalpha()) N/A 
+    # - Convertir a mayúsculas (upper()) ---->  Completo  
     
 
     palabra_secreta_final = palabra_secreta.upper()
@@ -57,7 +55,7 @@ def solicitar_palabra()->str:
     
 
 
-def solicitar_letra(letras_usadas):
+def solicitar_letra(letra)-> any:
     """
     Solicita una letra al jugador 2
     La letra debe ser válida (solo una letra) y no estar ya usada
@@ -69,14 +67,24 @@ def solicitar_letra(letras_usadas):
         str: La letra introducida en mayúsculas
     """
     # TODO: Implementar la función
-    # - Usar un bucle while para repetir hasta que la letra sea válida
-    # - Verificar que sea solo un carácter (len() == 1)
-    # - Verificar que sea una letra (isalpha())
-    # - Verificar que no esté en letras_usadas (operador 'in')
-    # - Convertir a mayúsculas (upper())
+    # - Usar un bucle while para repetir hasta que la letra sea válida ---->  Completado 
+    # - Verificar que sea solo un carácter (len() == 1) ----> Completado 
+    # - Verificar que sea una letra (isalpha()) ---->  Completado 
+    # - Verificar que no esté en letras_usadas (operador 'in')   
+    # - Convertir a mayúsculas (upper()) ---->  Completado 
     
     
-    while 
+    letras_usadas = []
+
+    while letra.isalpha() == False or len(letra) > 1: 
+        letra = input("!!Escribe UNA sola LETRA!! :")
+        
+    letra_final = letra.upper()
+    
+    letras_usadas.append(letra_final)
+    
+    
+    return letras_usadas
 
 
 def mostrar_estado(palabra_oculta, intentos, letras_usadas):
@@ -93,7 +101,6 @@ def mostrar_estado(palabra_oculta, intentos, letras_usadas):
     # - Imprimir la palabra con espacios entre caracteres
     # - Imprimir las letras usadas
     pass
-
 
 def actualizar_palabra_oculta(palabra, palabra_oculta, letra):
     """
@@ -113,7 +120,6 @@ def actualizar_palabra_oculta(palabra, palabra_oculta, letra):
     # - Si el carácter coincide con la letra, reemplazar en palabra_oculta
     # - Puedes convertir palabra_oculta a lista, modificar y volver a string
     pass
-
 
 def jugar():
     """
@@ -167,12 +173,19 @@ def main():
     # jugar_otra_vez = input("\n¿Quieres jugar otra vez? (s/n): ")
     # if jugar_otra_vez.lower() == 's':
     #     main()
-
-
     
     palabra_es = solicitar_palabra()
     
+    
+    letra = solicitar_letra(input("Escribe una sola letra: ")) 
+    
+    print(letra)
+    
+
     print(palabra_es)
+    
+    
+    
 
 if __name__ == "__main__":
     main()
