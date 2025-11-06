@@ -8,9 +8,14 @@ Práctica de programación que evalúa:
 - Sentencias iterativas
 - Manipulación de strings
 
-Autor: [Nombre del alumno]
-Fecha: [Fecha]
+Autor: [Daniel Felipe Oliveros Rojas]
+Fecha: [7/11/2025]
 """
+
+
+import random
+
+
 
 
 def limpiar_pantalla():
@@ -21,7 +26,7 @@ def limpiar_pantalla():
     print("\n" * 50)
 
 
-def solicitar_palabra():
+def solicitar_palabra()->str:
     """
     Solicita una palabra al jugador 1
     La palabra debe tener mínimo 5 caracteres y solo contener letras
@@ -29,12 +34,27 @@ def solicitar_palabra():
     Returns:
         str: La palabra a adivinar en mayúsculas
     """
+    
+    palabras = [
+    "python","variable","funcion","algoritmo","compilador","programacion",
+    "desarrollo","software","hardware","depuracion","biblioteca","framework",
+    "inteligencia","computadora","interfaz","politica","democracia","gobierno",
+    "constitucion","debate","eleccion","ciudadania","parlamento","ministro"
+]
+    palabra_secreta = random.choice(palabras)
+    
+    
     # TODO: Implementar la función
-    # - Usar un bucle while para repetir hasta que la palabra sea válida
-    # - Verificar que tenga al menos 5 caracteres (len())
-    # - Verificar que solo contenga letras (isalpha())
-    # - Convertir a mayúsculas (upper())
-    pass
+    # - Usar un bucle while para repetir hasta que la palabra sea válida - ya 
+    # - Verificar que tenga al menos 5 caracteres (len()) - ya 
+    # - Verificar que solo contenga letras (isalpha()) - ya 
+    # - Convertir a mayúsculas (upper()) - ya 
+    
+
+    palabra_secreta_final = palabra_secreta.upper()
+    
+    return palabra_secreta_final
+    
 
 
 def solicitar_letra(letras_usadas):
@@ -54,7 +74,9 @@ def solicitar_letra(letras_usadas):
     # - Verificar que sea una letra (isalpha())
     # - Verificar que no esté en letras_usadas (operador 'in')
     # - Convertir a mayúsculas (upper())
-    pass
+    
+    
+    while 
 
 
 def mostrar_estado(palabra_oculta, intentos, letras_usadas):
@@ -146,6 +168,11 @@ def main():
     # if jugar_otra_vez.lower() == 's':
     #     main()
 
+
+    
+    palabra_es = solicitar_palabra()
+    
+    print(palabra_es)
 
 if __name__ == "__main__":
     main()
