@@ -128,16 +128,15 @@ def actualizar_palabra_oculta(palabra, palabra_oculta, letra):
         str: La palabra oculta actualizada
     """
     
-    # Convertimos la palabra oculta a lista para poder modificarla
     palabra_oculta = list(palabra_oculta)
     
-    # Recorremos la palabra original
+    
     for indice, caracter in enumerate(palabra):
-        # Si encontramos la letra, la revelamos
+        
         if caracter == letra:
             palabra_oculta[indice] = letra
     
-    # Convertimos la lista de nuevo a string
+    
     return "".join(palabra_oculta)
 
 
