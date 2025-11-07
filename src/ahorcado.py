@@ -17,11 +17,15 @@ import random
 
 
 def limpiar_pantalla():
+    
+    
     """
     Imprime varias líneas en blanco para 'limpiar' la consola
     y que el jugador 2 no vea la palabra introducida
     """
-    print("\n" * 50)
+    print(  "\n" * 50)
+    print("Limpiando pantalla...")
+
 
 
 def solicitar_palabra()->str:
@@ -32,30 +36,28 @@ def solicitar_palabra()->str:
     Returns:
         str: La palabra a adivinar en mayúsculas
     """
-    
     palabras = [
     "python","variable","funcion","algoritmo","compilador","programacion",
     "desarrollo","software","hardware","depuracion","biblioteca","framework",
     "inteligencia","computadora","interfaz","politica","democracia","gobierno",
     "constitucion","debate","eleccion","ciudadania","parlamento","ministro"
 ]
-    palabra_secreta = random.choice(palabras)
-    
+    palabra = random.choice(palabras)
     
     # TODO: Implementar la función
     # - Usar un bucle while para repetir hasta que la palabra sea válida N/A
     # - Verificar que tenga al menos 5 caracteres (len())  N/A
     # - Verificar que solo contenga letras (isalpha()) N/A 
     # - Convertir a mayúsculas (upper()) ---->  Completo  
-    
-
-    palabra_secreta_final = palabra_secreta.upper()
-    
-    return palabra_secreta_final
-    
 
 
-def solicitar_letra(letra)-> any:
+    palabra = palabra.upper()
+    
+    return palabra
+
+
+
+def solicitar_letra(letras_usadas:list)->str:
     """
     Solicita una letra al jugador 2
     La letra debe ser válida (solo una letra) y no estar ya usada
@@ -73,18 +75,17 @@ def solicitar_letra(letra)-> any:
     # - Verificar que no esté en letras_usadas (operador 'in')   
     # - Convertir a mayúsculas (upper()) ---->  Completado 
     
-    
-    letras_usadas = []
+    letra = input("Escribe un una sola letra: ")
 
-    while letra.isalpha() == False or len(letra) > 1: 
+
+    while letra.isalpha() == False or len(letra) > 1 or letra in letras_usadas: 
+        if letra in letras_usadas:
+            print("si esta")
         letra = input("!!Escribe UNA sola LETRA!! :")
-        
-    letra_final = letra.upper()
-    
-    letras_usadas.append(letra_final)
-    
-    
-    return letras_usadas
+
+    letra = letra.upper()
+    return letra
+
 
 
 def mostrar_estado(palabra_oculta, intentos, letras_usadas):
@@ -100,12 +101,24 @@ def mostrar_estado(palabra_oculta, intentos, letras_usadas):
     # - Imprimir intentos restantes
     # - Imprimir la palabra con espacios entre caracteres
     # - Imprimir las letras usadas
-    pass
+    
+    print(f"Intentos restantes: {intentos}")
+    
+    
+    print(f"{letras_usadas}")
+    
+
+    print(palabra_oculta)
+    
+    
+    return 
+
+
 
 def actualizar_palabra_oculta(palabra, palabra_oculta, letra):
     """
     Actualiza la palabra oculta revelando las apariciones de la letra
-    
+
     Args:
         palabra (str): La palabra completa a adivinar
         palabra_oculta (str): La palabra actual con _ y letras adivinadas
@@ -114,12 +127,19 @@ def actualizar_palabra_oculta(palabra, palabra_oculta, letra):
     Returns:
         str: La palabra oculta actualizada
     """
-    # TODO: Implementar la función
-    # - Recorrer la palabra original con un bucle for
-    # - Usar enumerate() para obtener índice y carácter
-    # - Si el carácter coincide con la letra, reemplazar en palabra_oculta
-    # - Puedes convertir palabra_oculta a lista, modificar y volver a string
-    pass
+    
+    # Convertimos la palabra oculta a lista para poder modificarla
+    palabra_oculta = list(palabra_oculta)
+    
+    # Recorremos la palabra original
+    for indice, caracter in enumerate(palabra):
+        # Si encontramos la letra, la revelamos
+        if caracter == letra:
+            palabra_oculta[indice] = letra
+    
+    # Convertimos la lista de nuevo a string
+    return "".join(palabra_oculta)
+
 
 def jugar():
     """
@@ -130,17 +150,34 @@ def jugar():
     # Configuración inicial
     INTENTOS_MAXIMOS = 5
     
+    
     # TODO: Solicitar la palabra al jugador 1
-    # palabra = solicitar_palabra()
+    # palabra = solicitar_palabra() ----> 
+    
+    palabra = solicitar_palabra()
+    
     
     # TODO: Limpiar la pantalla para que el jugador 2 no vea la palabra
     # limpiar_pantalla()
+    
+    limpiar_pantalla()  
+    
+
     
     # TODO: Inicializar variables del juego
     # - palabra_oculta: string con guiones bajos (ej: "_ _ _ _ _")
     # - intentos: número de intentos restantes
     # - letras_usadas: lista vacía
     # - juego_terminado: False
+    
+    palabra_oculta = "_" * len(palabra)
+    
+    intentos = INTENTOS_MAXIMOS 
+    
+    letras_usadas = []
+    
+    juego_terminado = False
+    
     
     print("Jugador 2: ¡Adivina la palabra!\n")
     
@@ -157,11 +194,28 @@ def jugar():
     #      - Restar un intento
     #      - Mostrar mensaje de fallo
     
+    while intentos > 0 and juego_terminado == False : 
+        
+        mostrar_estado(palabra_oculta, intentos,letras_usadas)
+        letra = solicitar_letra(letras_usadas)
+        letras_usadas.append(letras_usadas)
+        palabra_oculta = actualizar_palabra_oculta(palabra, palabra_oculta, letra)
+        if letra not in letras_usadas: 
+            intentos = intentos - 1 
+            print ("la letra no esta en la palabra")
+            
+
+
+    
     # TODO: Mostrar mensaje final
     # - Si ganó: mostrar felicitación y la palabra
     # - Si perdió: mostrar mensaje de derrota y la palabra correcta
-    pass
 
+    if palabra == palabra_oculta :
+        print("Ganaste")
+    else:
+        print(f"perdiste la palbra era {palabra}")
+        
 
 def main():
     """
@@ -170,22 +224,11 @@ def main():
     jugar()
     
     # TODO (Opcional): Preguntar si quiere jugar otra vez
-    # jugar_otra_vez = input("\n¿Quieres jugar otra vez? (s/n): ")
-    # if jugar_otra_vez.lower() == 's':
-    #     main()
-    
-    palabra_es = solicitar_palabra()
-    
-    
-    letra = solicitar_letra(input("Escribe una sola letra: ")) 
-    
-    print(letra)
+    jugar_otra_vez = input("\n¿Quieres jugar otra vez? (s/n): ")
+    if jugar_otra_vez.lower() == 's':
+        main()
     
 
-    print(palabra_es)
-    
-    
-    
 
 if __name__ == "__main__":
     main()
