@@ -42,10 +42,7 @@ def solicitar_palabra()->str:
     # - Convertir a mayúsculas (upper()) ---->  Completo
 
     palabras = [
-        "python", "variable", "funcion", "algoritmo", "compilador", "programacion",
-        "desarrollo", "software", "hardware", "depuracion", "biblioteca", "framework",
-        "inteligencia", "computadora", "interfaz", "politica", "democracia", "gobierno",
-        "constitucion", "debate", "eleccion", "ciudadania", "parlamento", "ministro"
+        "python", "variable"
     ]
 
     palabra = random.choice(palabras)
@@ -122,15 +119,20 @@ def actualizar_palabra_oculta(palabra, palabra_oculta, letra):
     Returns:
         str: La palabra oculta actualizada
     """
+    # TODO: Implementar la función
+    # - Recorrer la palabra original con un bucle for
+    # - Usar enumerate() para obtener índice y carácter
+    # - Si el carácter coincide con la letra, reemplazar en palabra_oculta
+    # - Puedes convertir palabra_oculta a lista, modificar y volver a string
+
     
     palabra_oculta = list(palabra_oculta)
-    
-    
+
     for indice, caracter in enumerate(palabra):
-        
         if caracter == letra:
             palabra_oculta[indice] = letra
-    
+            print(palabra_oculta)
+
     
     return "".join(palabra_oculta)
 
@@ -143,19 +145,15 @@ def jugar():
     
     # Configuración inicial
     INTENTOS_MAXIMOS = 5
-    
-    
+
     # TODO: Solicitar la palabra al jugador 1
     # palabra = solicitar_palabra() ----> 
     
     palabra = solicitar_palabra()
-    
-    
+
     # TODO: Limpiar la pantalla para que el jugador 2 no vea la palabra
     # limpiar_pantalla()
-    
     limpiar_pantalla()  
-    
 
     
     # TODO: Inicializar variables del juego
@@ -164,8 +162,9 @@ def jugar():
     # - letras_usadas: lista vacía
     # - juego_terminado: False
     
-    palabra_oculta = "_ " * len(palabra)
-    
+    palabra_oculta = "_" * len(palabra)
+
+
     letras_usadas = []
     
     juego_terminado = False
@@ -186,21 +185,20 @@ def jugar():
     #      - Restar un intento
     #      - Mostrar mensaje de fallo
     
-    while INTENTOS_MAXIMOS > 0 and juego_terminado == False : 
-        
-        mostrar_estado(palabra_oculta, INTENTOS_MAXIMOS,letras_usadas)
-        
-        letra = solicitar_letra(letras_usadas)
-        
-        letras_usadas.append(letras_usadas)
-        
-        palabra_oculta = actualizar_palabra_oculta(palabra, palabra_oculta, letra)
-        
-        if letra not in letras_usadas: 
-            INTENTOS_MAXIMOS -= 1 
-            print ("la letra no esta en la palabra")
-            
+    while INTENTOS_MAXIMOS > 0 and juego_terminado == False :
 
+        mostrar_estado(palabra_oculta, INTENTOS_MAXIMOS,letras_usadas)
+
+        letra = solicitar_letra(letras_usadas)
+
+        letras_usadas.append(f"{letra}" )
+
+
+        palabra_oculta = actualizar_palabra_oculta(palabra, palabra_oculta,letra)
+
+        if letra not in palabra:
+            INTENTOS_MAXIMOS -= 1
+            print("La letra no está en la palabra")
 
     
     # TODO: Mostrar mensaje final
