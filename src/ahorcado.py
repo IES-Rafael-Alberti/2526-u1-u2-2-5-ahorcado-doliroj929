@@ -16,9 +16,7 @@ Fecha: [7/11/2025]
 import random
 
 
-def limpiar_pantalla():
-    
-    
+def limpiar_pantalla():    
     """
     Imprime varias líneas en blanco para 'limpiar' la consola
     y que el jugador 2 no vea la palabra introducida
@@ -36,25 +34,25 @@ def solicitar_palabra()->str:
     Returns:
         str: La palabra a adivinar en mayúsculas
     """
-    palabras = [
-    "python","variable","funcion","algoritmo","compilador","programacion",
-    "desarrollo","software","hardware","depuracion","biblioteca","framework",
-    "inteligencia","computadora","interfaz","politica","democracia","gobierno",
-    "constitucion","debate","eleccion","ciudadania","parlamento","ministro"
-]
-    palabra = random.choice(palabras)
-    
+
     # TODO: Implementar la función
     # - Usar un bucle while para repetir hasta que la palabra sea válida N/A
     # - Verificar que tenga al menos 5 caracteres (len())  N/A
     # - Verificar que solo contenga letras (isalpha()) N/A 
-    # - Convertir a mayúsculas (upper()) ---->  Completo  
+    # - Convertir a mayúsculas (upper()) ---->  Completo
 
+    palabras = [
+        "python", "variable", "funcion", "algoritmo", "compilador", "programacion",
+        "desarrollo", "software", "hardware", "depuracion", "biblioteca", "framework",
+        "inteligencia", "computadora", "interfaz", "politica", "democracia", "gobierno",
+        "constitucion", "debate", "eleccion", "ciudadania", "parlamento", "ministro"
+    ]
 
-    palabra = palabra.upper()
-    
+    palabra = random.choice(palabras)
+
+    palabra =palabra.upper()
+
     return palabra
-
 
 
 def solicitar_letra(letras_usadas:list)->str:
@@ -77,13 +75,11 @@ def solicitar_letra(letras_usadas:list)->str:
     
     letra = input("Escribe un una sola letra: ")
 
-
-    while letra.isalpha() == False or len(letra) > 1 or letra in letras_usadas: 
-        if letra in letras_usadas:
-            print("si esta")
-        letra = input("!!Escribe UNA sola LETRA!! :")
+    while not letra.isalpha() or len(letra) > 1 or letra.upper() in letras_usadas:
+            letra = input("Escribe un UNA SOLA LETRA POR FAVOR: ")
 
     letra = letra.upper()
+
     return letra
 
 
@@ -105,13 +101,12 @@ def mostrar_estado(palabra_oculta, intentos, letras_usadas):
     print(f"Intentos restantes: {intentos}")
     
     
-    print(f"{letras_usadas}")
+    print(palabra_oculta) 
     
 
-    print(palabra_oculta)
-    
-    
-    return 
+    for i in letras_usadas:
+        print(f"{i}, ") 
+
 
 
 
@@ -169,9 +164,7 @@ def jugar():
     # - letras_usadas: lista vacía
     # - juego_terminado: False
     
-    palabra_oculta = "_" * len(palabra)
-    
-    intentos = INTENTOS_MAXIMOS 
+    palabra_oculta = "_ " * len(palabra)
     
     letras_usadas = []
     
@@ -193,14 +186,18 @@ def jugar():
     #      - Restar un intento
     #      - Mostrar mensaje de fallo
     
-    while intentos > 0 and juego_terminado == False : 
+    while INTENTOS_MAXIMOS > 0 and juego_terminado == False : 
         
-        mostrar_estado(palabra_oculta, intentos,letras_usadas)
+        mostrar_estado(palabra_oculta, INTENTOS_MAXIMOS,letras_usadas)
+        
         letra = solicitar_letra(letras_usadas)
+        
         letras_usadas.append(letras_usadas)
+        
         palabra_oculta = actualizar_palabra_oculta(palabra, palabra_oculta, letra)
+        
         if letra not in letras_usadas: 
-            intentos = intentos - 1 
+            INTENTOS_MAXIMOS -= 1 
             print ("la letra no esta en la palabra")
             
 
