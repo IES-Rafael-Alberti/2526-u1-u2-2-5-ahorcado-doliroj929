@@ -7,10 +7,10 @@ Hay dos botones principales:
 -   **Paso a paso por instrucciones**
     
 
-Pude verificar que pasé un parámetro incorrecto en `letras_usadas` y la misma lista, por eso se creaba un tipo de bucle interno.
+Pude verificar que pasé un parámetro incorrecto en la funcion `solicitar_letra` que solicitaba una variable  `letras`  que guadaba  lo que retorna la funcion `solicitar_letra` y la misma lista, por eso se creaba un tipo de bucle interno.
 
-![Texto alternativo](./Debbuger/Debbugear.jpg)
+![Debbugear_01](./Debbuger/Debbugear.jpg)
 
-![Texto alternativo](./Debbuger/Debbugear02.jpg)
+![Debbugear_02](./Debbuger/Debbugear02.jpg)
 
-![Texto alternativo](./Debbuger/Debbugear03.jpg)
+![Debbugear_03](./Debbuger/Debbugear03.jpg)

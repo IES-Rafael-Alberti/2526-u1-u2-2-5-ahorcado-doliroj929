@@ -73,7 +73,7 @@ def solicitar_letra(letras_usadas:list)->str:
     letra = input("Escribe un una sola letra: ")
 
     while not letra.isalpha() or len(letra) > 1 or letra.upper() in letras_usadas:
-            letra = input("Escribe un UNA SOLA LETRA POR FAVOR: ")
+            letra = input("Escribe un UNA SOLA LETRA POR FAVOR o ya la has usado: ")
 
     letra = letra.upper()
 
@@ -191,7 +191,7 @@ def jugar():
 
         letra = solicitar_letra(letras_usadas)
 
-        letras_usadas.append(f"{letra}" )
+        letras_usadas.append(letra)
 
 
         palabra_oculta = actualizar_palabra_oculta(palabra, palabra_oculta,letra)
